@@ -1,15 +1,3 @@
-INSERT INTO House (id, version, address) VALUES (1, 0, 'ул.Цюрупы, 16');
-
-INSERT INTO House (id, version, address) VALUES (2, 0, 'ул.Лунина, 7');
-
-INSERT INTO Person (id, version, first_name, age) VALUES (1, 0, 'Пётр', 20);
-
-INSERT INTO Person (id, version, first_name, age) VALUES (2, 0, 'John', 25);
-
-INSERT INTO Person_House (person_id, house_id) VALUES (1, 1);
-
-INSERT INTO Person_House (person_id, house_id) VALUES (1, 2);
-
 INSERT into Organization (id, version, name, full_name, inn, kpp, address, phone, is_active)
 VALUES (1, 0, 'Башнефть', 'ОАО "Башнефть"', '123456789012', '123456789', 'Уфа, Бакалинская 32', '834523451', TRUE);
 
@@ -32,17 +20,25 @@ INSERT into Office (id, version, org_id, name, address)
 VALUES (5, 0, 2, 'АЗС Лукойл №483', 'Ленина 40');
 
 INSERT into Doc (id, name, code) VALUES (1, 'Паспорт', '23');
+
 INSERT into Doc (id, name, code) VALUES (2, 'Военный билет', '13');
+
 INSERT into Doc (id, name, code) VALUES (3, 'Водительское удостоверение', '55');
 
 INSERT into Country (id, citizenship_code, name) VALUES (1, '643', 'Российская Федерация');
+
 INSERT into Country (id, citizenship_code, name) VALUES (2, '014', 'Украина');
+
 INSERT into Country (id, citizenship_code, name) VALUES (3, '120', 'Франция');
+
 INSERT into Country (id, citizenship_code, name) VALUES (4, '333', 'США');
+
 INSERT into Country (id, citizenship_code, name) VALUES (5, '355', 'Финляндия');
 
 INSERT into User_doc(id, version, doc_id, doc_number, doc_date) VALUES (1, 0, 1, '3451341', DATE '2004-12-31');
+
 INSERT into User_doc(id, version, doc_id, doc_number, doc_date) VALUES (2, 0, 2, '342525', DATE '2005-10-04');
+
 INSERT into User_doc(id, version, doc_id, doc_number, doc_date) VALUES (3, 0, 3, '123658', DATE '2006-11-07');
 
 INSERT into User (id, version, first_name, second_name, middle_name, position, phone, user_doc_id, office_id, country_id, is_identified)

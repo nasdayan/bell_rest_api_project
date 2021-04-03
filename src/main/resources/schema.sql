@@ -1,34 +1,5 @@
-CREATE TABLE IF NOT EXISTS Person (
-    id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
-    first_name VARCHAR(50) NOT NULL COMMENT 'Имя',
-    age        INTEGER  NOT NULL    COMMENT 'Возраст'
-);
-COMMENT ON TABLE Person IS 'Человек';
-
-CREATE TABLE IF NOT EXISTS House (
-    id         INTEGER              COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
-    version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
-    address    VARCHAR(50) NOT NULL COMMENT 'Адрес'
-);
-COMMENT ON TABLE House IS 'Дом';
-
-CREATE TABLE IF NOT EXISTS Person_House (
-    person_id   INTEGER  NOT NULL COMMENT 'Уникальный идентификатор человека',
-    house_id    INTEGER  NOT NULL COMMENT 'Уникальный идентификатор дома',
-
-    PRIMARY KEY (person_id, house_id)
-);
-COMMENT ON TABLE Person_House IS 'join-таблица для связи человека и дома';
-
-CREATE INDEX IX_Person_House_Id ON Person_House (house_id);
-ALTER TABLE Person_House ADD FOREIGN KEY (house_id) REFERENCES House(id);
-
-CREATE INDEX IX_House_Person_Id ON Person_House (person_id);
-ALTER TABLE Person_House ADD FOREIGN KEY (person_id) REFERENCES Person(id);
-
 CREATE TABLE IF NOT EXISTS Organization (
-    id         INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    id         INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version    INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
     name       VARCHAR(50) NOT NULL     COMMENT 'Название организации',
     full_name  VARCHAR(50) NOT NULL     COMMENT 'Полное название организации',
@@ -36,33 +7,33 @@ CREATE TABLE IF NOT EXISTS Organization (
     kpp        VARCHAR(9) NOT NULL      COMMENT 'КПП организации',
     address    VARCHAR(100) NOT NULL    COMMENT 'Адрес организации',
     phone      VARCHAR(20)              COMMENT 'Телефон организации',
-    is_active  BOOLEAN NOT NULL         COMMENT 'Статус активности организации'
+    is_active  BOOLEAN                  COMMENT 'Статус активности организации'
 );
 COMMENT ON TABLE Organization IS 'Организация';
 
 CREATE TABLE IF NOT EXISTS Office (
-    id         INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-    version    INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
-    org_id     INTEGER                  COMMENT 'Внешний ключ к таблице organization',
-    name       VARCHAR(100) NOT NULL    COMMENT 'Название офиса',
-    phone      VARCHAR(50)              COMMENT 'Телефон офиса',
-    address    VARCHAR(100) NOT NULL    COMMENT 'Адрес офиса',
-    is_active  BOOLEAN                  COMMENT 'Статус активности офиса'
+      id         INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+      version    INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
+      org_id     INTEGER                  COMMENT 'Внешний ключ к таблице organization',
+      name       VARCHAR(100) NOT NULL    COMMENT 'Название офиса',
+      phone      VARCHAR(50)              COMMENT 'Телефон офиса',
+      address    VARCHAR(100) NOT NULL    COMMENT 'Адрес офиса',
+      is_active  BOOLEAN                  COMMENT 'Статус активности офиса'
 );
 COMMENT ON TABLE Office IS 'Офис';
 
 create table User (
-    id            INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-    version       INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
-    first_name    VARCHAR(50) NOT NULL     COMMENT 'Имя пользователя',
-    second_name   VARCHAR(50)              COMMENT 'Фамилия пользователя',
-    middle_name   VARCHAR(50)              COMMENT 'Отчество пользователя',
-    position      VARCHAR(50) NOT NULL     COMMENT 'Должность пользователя',
-    phone         VARCHAR(20)              COMMENT 'Номер телефона пользователя',
-    user_doc_id   INTEGER                  COMMENT 'Внешний ключ к таблице user_doc',
-    office_id     INTEGER                  COMMENT 'Внешний ключ к таблице office',
-    country_id    INTEGER                  COMMENT 'Внешний ключ к таблице country',
-    is_identified BOOLEAN NOT NULL         COMMENT 'Статус идентификации пользователя'
+      id            INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+      version       INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
+      first_name    VARCHAR(50) NOT NULL     COMMENT 'Имя пользователя',
+      second_name   VARCHAR(50)              COMMENT 'Фамилия пользователя',
+      middle_name   VARCHAR(50)              COMMENT 'Отчество пользователя',
+      position      VARCHAR(50) NOT NULL     COMMENT 'Должность пользователя',
+      phone         VARCHAR(20)              COMMENT 'Номер телефона пользователя',
+      user_doc_id   INTEGER                  COMMENT 'Внешний ключ к таблице user_doc',
+      office_id     INTEGER                  COMMENT 'Внешний ключ к таблице office',
+      country_id    INTEGER                  COMMENT 'Внешний ключ к таблице country',
+      is_identified BOOLEAN                  COMMENT 'Статус идентификации пользователя'
 );
 COMMENT ON TABLE Office IS 'Пользователь';
 
@@ -74,18 +45,18 @@ CREATE table Doc (
 COMMENT ON TABLE Doc IS 'Справочник документов';
 
 CREATE table User_doc (
-     id           INTEGER             COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-     version      INTEGER NOT NULL    COMMENT 'Служебное поле hibernate',
-     doc_id       INTEGER             COMMENT 'Внешний ключ к таблице doc',
-     doc_number   VARCHAR(50)         COMMENT 'Номер документа',
-     doc_date     DATE                COMMENT 'Дата выдачи документа'
+      id           INTEGER             COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+      version      INTEGER NOT NULL    COMMENT 'Служебное поле hibernate',
+      doc_id       INTEGER             COMMENT 'Внешний ключ к таблице doc',
+      doc_number   VARCHAR(50)         COMMENT 'Номер документа',
+      doc_date     DATE                COMMENT 'Дата выдачи документа'
 );
 COMMENT ON TABLE User_doc IS 'Документ пользователя';
 
 CREATE table Country (
-    id                     INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-    citizenship_code       VARCHAR(3) NOT NULL      COMMENT 'Код страны',
-    name                   VARCHAR(50) NOT NULL     COMMENT 'Название страны'
+     id                     INTEGER                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+     citizenship_code       VARCHAR(3) NOT NULL      COMMENT 'Код страны',
+     name                   VARCHAR(50) NOT NULL     COMMENT 'Название страны'
 );
 COMMENT ON TABLE Country IS 'Справочник стран';
 
