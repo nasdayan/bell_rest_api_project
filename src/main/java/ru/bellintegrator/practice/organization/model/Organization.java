@@ -1,12 +1,18 @@
 package ru.bellintegrator.practice.organization.model;
 
+import ru.bellintegrator.practice.office.model.Office;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import java.util.List;
 
 @Entity
 @Table(name = "Organization")
@@ -43,6 +49,16 @@ public class Organization {
 
     @Column(name = "is_active")
     private Boolean isActive;
+
+    @OneToMany(cascade = {
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+        },
+            fetch = FetchType.LAZY,
+            mappedBy = "organization")
+    private List<Office> offices;
 
     public Long getId() {
         return id;
@@ -114,5 +130,28 @@ public class Organization {
 
     public void setIsActive(Boolean active) {
         isActive = active;
+    }
+
+    public List<Office> getOffices() {
+        return offices;
+    }
+
+    public void setOffices(List<Office> offices) {
+        this.offices = offices;
+    }
+
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", inn='" + inn + '\'' +
+                ", kpp='" + kpp + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isActive=" + isActive +
+                '}';
     }
 }

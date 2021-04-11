@@ -1,6 +1,7 @@
 package ru.bellintegrator.practice.office.model;
 
 import ru.bellintegrator.practice.organization.model.Organization;
+import ru.bellintegrator.practice.user.model.User;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import java.util.List;
 
 @Entity
 @Table(name = "Office")
@@ -40,6 +43,12 @@ public class Office {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "org_id")
     private Organization organization;
+
+    @OneToMany(cascade = {
+            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
+    })
+    @JoinColumn(name = "office_id")
+    private List<User> users;
 
     public Long getId() {
         return id;
@@ -95,5 +104,13 @@ public class Office {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

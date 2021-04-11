@@ -23,4 +23,20 @@ public class DocDaoImpl implements DocDao {
         TypedQuery<Doc> query = entityManager.createQuery("SELECT e FROM Doc e", Doc.class);
         return query.getResultList();
     }
+
+    @Override
+    public Doc getDocByDocCode(String code) {
+        String queryString = "SELECT d FROM " + Doc.class.getSimpleName() + " d WHERE d.code = :code";
+        TypedQuery<Doc> query = entityManager.createQuery(queryString, Doc.class);
+        query.setParameter("code", code);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Doc getDocByName(String name) {
+        String queryString = "SELECT d FROM " + Doc.class.getSimpleName() + " d WHERE d.name = :name";
+        TypedQuery<Doc> query = entityManager.createQuery(queryString, Doc.class);
+        query.setParameter("name", name);
+        return query.getSingleResult();
+    }
 }

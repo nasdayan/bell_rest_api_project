@@ -1,11 +1,16 @@
 package ru.bellintegrator.practice.doc.model;
 
+import ru.bellintegrator.practice.userDoc.model.UserDoc;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "Doc")
@@ -21,6 +26,11 @@ public class Doc {
 
     @Column(name = "code", length = 2, nullable = false)
     private String code;
+
+    @OneToMany(cascade = {
+            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
+    }, mappedBy = "doc")
+    private List<UserDoc> userDocs;
 
     public Long getId() {
         return id;
@@ -44,5 +54,13 @@ public class Doc {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public List<UserDoc> getUserDocs() {
+        return userDocs;
+    }
+
+    public void setUserDocs(List<UserDoc> userDocs) {
+        this.userDocs = userDocs;
     }
 }

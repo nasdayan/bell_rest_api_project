@@ -21,6 +21,12 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public List<CountryDto> countries() {
         List<Country> countries = countryDao.countries();
+//        return countries.stream().map(country -> {
+//            final CountryView view = new CountryView();
+//            view.setCode(country.getCode());
+//            view.setName(country.getName());
+//            return view;
+//        }).collect(Collectors.toList());
         List<CountryDto> countryDtoList = new ArrayList<>(countries.size());
         for (Country country : countries) {
             CountryDto countryDto = new CountryDto();

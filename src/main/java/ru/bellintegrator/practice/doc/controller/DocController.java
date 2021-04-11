@@ -27,6 +27,11 @@ public class DocController {
     }
 
     @ApiOperation(value = "Получение справочника документов", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = DocDto.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")
+    })
     @PostMapping(value = "/docs", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DocDto> documents() {
         return docService.documents();

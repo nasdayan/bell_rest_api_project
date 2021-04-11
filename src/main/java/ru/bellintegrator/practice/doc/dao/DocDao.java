@@ -10,4 +10,18 @@ public interface DocDao {
      * @return список документов
      */
     List<Doc> documents();
+
+    /**
+     * Получение документа из справочника по коду документа
+     * @param code код документа
+     * @return документ
+     */
+    Doc getDocByDocCode(String code);
+
+    /**
+     * Получение документа из справочника по названию документа
+     * @param name название документа
+     * @return документ
+     */
+    Doc getDocByName(String name);
 }

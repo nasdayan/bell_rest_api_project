@@ -49,6 +49,7 @@ public class Application {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("persons")
                 .apiInfo(apiInfo())
+                .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(regex("/.*"))

@@ -2,6 +2,8 @@ package ru.bellintegrator.practice.organization.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -36,6 +38,11 @@ public class OrganizationController {
     }
 
     @ApiOperation(value = "Получение списка организаций", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = OrganizationDto.class),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")
+    })
     @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FilteredOrganizations> organizations(@RequestBody @Valid OrganizationFilterDto organizationFilterDto) {
         return organizationService.getFilteredOrganizations(organizationFilterDto);
