@@ -83,6 +83,10 @@ public class OfficeServiceImpl implements OfficeService {
     @Transactional
     public void saveOffice(OfficeToSaveDto officeToSaveDto) {
         Office office = mapperFacade.map(officeToSaveDto, Office.class);
+        Organization organization = organizationDao.getOrganizationById(officeToSaveDto.getOrgId());
+        if (organization == null) {
+            throw new ItemNotFoundException("Organization with this id was not found");
+        }
         officeDao.saveOffice(office);
     }
 }

@@ -94,7 +94,6 @@ public class UserServiceImpl implements UserService {
             userByIdDto.setCitizenshipName(user.getCountry().getName());
             userByIdDto.setCitizenshipCode(user.getCountry().getCitizenshipCode());
         }
-//        userByIdView.setDocDate(user.getUserDoc().getDocDate().format(DateTimeFormatter.ISO_DATE));
         if (user.getUserDoc() != null) {
             userByIdDto.setDocDate(user.getUserDoc().getDocDate());
             userByIdDto.setDocNumber(user.getUserDoc().getDocNumber());
@@ -128,29 +127,27 @@ public class UserServiceImpl implements UserService {
         if (userToUpdateDto.getPhone() != null) {
             user.setPhone(userToUpdateDto.getPhone());
         }
-        UserDoc userDoc = user.getUserDoc();
-        if (userDoc == null) {
-            userDoc = new UserDoc();
+        if (userToUpdateDto.getDocName() != null || userToUpdateDto.getDocDate() != null || userToUpdateDto.getDocNumber() != null) {
+            UserDoc userDoc = user.getUserDoc() == null ? new UserDoc() : user.getUserDoc();
+            if (userToUpdateDto.getDocName() != null) {
+                if (docDao.getDocByName(userToUpdateDto.getDocName()) == null) {
+                    throw new ItemNotFoundException("Document with such name was not found");
+                }
+                Doc doc = docDao.getDocByName(userToUpdateDto.getDocName());
+                doc.setName(userToUpdateDto.getDocName());
+                String code = docDao.getDocByName(userToUpdateDto.getDocName()).getCode();
+                doc.setCode(code);
+                userDoc.setDoc(doc);
+            }
+            if (userToUpdateDto.getDocNumber() != null) {
+                userDoc.setDocNumber(userToUpdateDto.getDocNumber());
+            }
+            if (userToUpdateDto.getDocDate() != null) {
+                userDoc.setDocDate(userToUpdateDto.getDocDate());
+            }
             user.setUserDoc(userDoc);
             userDoc.setUser(user);
         }
-        Doc doc = null;
-        if (userToUpdateDto.getDocName() != null) {
-            if (docDao.getDocByName(userToUpdateDto.getDocName()) == null) {
-                throw new ItemNotFoundException("Document with such name was not found");
-            }
-            doc = docDao.getDocByName(userToUpdateDto.getDocName());
-            doc.setName(userToUpdateDto.getDocName());
-            String code = docDao.getDocByName(userToUpdateDto.getDocName()).getCode();
-            doc.setCode(code);
-        }
-        if (userToUpdateDto.getDocNumber() != null) {
-            userDoc.setDocNumber(userToUpdateDto.getDocNumber());
-        }
-        if (userToUpdateDto.getDocDate() != null) {
-            userDoc.setDocDate(userToUpdateDto.getDocDate());
-        }
-        userDoc.setDoc(doc);
         if (userToUpdateDto.getCitizenshipCode() != null) {
             Country country = countryDao.getCountryByCitizenshipCode(userToUpdateDto.getCitizenshipCode());
             user.setCountry(country);

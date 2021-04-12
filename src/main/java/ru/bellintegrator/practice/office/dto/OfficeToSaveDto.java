@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @ApiModel(description = "Офис для сохранения")
@@ -23,7 +24,7 @@ public class OfficeToSaveDto {
 
     private Boolean isActive;
 
-    @NotEmpty(message = "orgId cannot be null or empty")
+    @NotNull(message = "orgId cannot be null")
     private Long orgId;
 
     public String getName() {
