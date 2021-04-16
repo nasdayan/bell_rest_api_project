@@ -11,22 +11,22 @@ public class UserListFilterDto {
     @NotEmpty(message = "officeId must be not null or empty")
     private Long officeId;
 
-    @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 50, message = "firstName must be more {min} and less than {max} characters")
     private String firstName;
 
-    @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 50, message = "secondName must be more {min} and less than {max} characters")
     private String secondName;
 
-    @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 50, message = "middleName must be more {min} and less than {max} characters")
     private String middleName;
 
-    @Size(max = 50, message = "The field must be less than {max} characters")
+    @Size(max = 50, message = "position must be less than {max} characters")
     private String position;
 
-    @Size(min = 2, max = 2, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 2, message = "docCode must be {max} characters")
     private String docCode;
 
-    @Size(min = 3, max = 3, message = "The field's length must be {max}")
+    @Size(min = 3, max = 3, message = "citizenshipCode must be {max} characters")
     private String citizenshipCode;
 
     public Long getOfficeId() {

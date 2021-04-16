@@ -11,32 +11,34 @@ public class UserToSaveDto {
     private Long officeId;
 
     @NotEmpty(message = "firstName must be not null or empty")
-    @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 50, message = "firstName must be more {min} and less than {max} characters")
     private String firstName;
 
-    @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 50, message = "secondName must be more {min} and less than {max} characters")
     private String secondName;
 
-    @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 50, message = "middleName must be more {min} and less than {max} characters")
     private String middleName;
 
     @NotEmpty(message = "position must be not null or empty")
-    @Size(max = 50, message = "The field must be less than {max} characters")
+    @Size(max = 50, message = "position must be less than {max} characters")
     private String position;
 
-    @Size(max = 20, message = "The field must be less than {max} characters")
+    @Size(max = 20, message = "phone must be less than {max} characters")
     private String phone;
 
-    @Size(min = 2, max = 2, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 2, message = "docCode must be more {min} and less than {max} characters")
     private String docCode;
 
+    @Size(max = 50, message = "docName must be less than {max} characters")
     private String docName;
 
+    @Size(max = 50, message = "docNumber must be less than {max} characters")
     private String docNumber;
 
     private Date docDate;
 
-    @Size(min = 3, max = 3, message = "The field's length must be {max}")
+    @Size(min = 3, max = 3, message = "citizenshipCode must be {max} characters")
     private String citizenshipCode;
 
     private Boolean isIdentified;

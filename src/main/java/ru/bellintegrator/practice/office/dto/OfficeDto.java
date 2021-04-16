@@ -17,14 +17,14 @@ public class OfficeDto {
     private String id;
 
     @NotEmpty(message = "name must be not null or empty")
-    @Size(min = 2, max = 100, message = "The field must be more {min} and less than {max} characters")
+    @Size(min = 2, max = 100, message = "name must be more {min} and less than {max} characters")
     private String name;
 
-    @NotEmpty(message = "name must be not null or empty")
-    @Size(min = 2, max = 100, message = "The field must be more {min} and less than {max} characters")
+    @NotEmpty(message = "address must be not null or empty")
+    @Size(min = 2, max = 100, message = "address must be more {min} and less than {max} characters")
     private String address;
 
-    @Size(max = 50, message = "The field must be less than {max} characters")
+    @Size(max = 50, message = "phone must be less than {max} characters")
     private String phone;
 
     private Boolean isActive;

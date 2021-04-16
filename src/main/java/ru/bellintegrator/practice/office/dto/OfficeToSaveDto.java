@@ -11,15 +11,15 @@ import javax.validation.constraints.Size;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OfficeToSaveDto {
 
-    @NotEmpty(message = "field cannot be null or empty")
-    @Size(min = 2, max = 100, message = "The field must be more {min} and less than {max} characters")
+    @NotEmpty(message = "name cannot be null or empty")
+    @Size(min = 2, max = 100, message = "name must be more {min} and less than {max} characters")
     private String name;
 
-    @NotEmpty(message = "field cannot be null or empty")
-    @Size(min = 2, max = 100, message = "The field must be more {min} and less than {max} characters")
+    @NotEmpty(message = "address cannot be null or empty")
+    @Size(min = 2, max = 100, message = "address must be more {min} and less than {max} characters")
     private String address;
 
-    @Size(max = 50, message = "The field must be less than {max} characters")
+    @Size(max = 50, message = "phone must be less than {max} characters")
     private String phone;
 
     private Boolean isActive;

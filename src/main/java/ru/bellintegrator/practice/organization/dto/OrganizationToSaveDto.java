@@ -10,24 +10,24 @@ import javax.validation.constraints.Size;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrganizationToSaveDto {
 
-    @NotEmpty(message = "full name must be not null or empty")
+    @NotEmpty(message = "name must be not null or empty")
     @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
     private String name;
 
-    @NotEmpty(message = "full name must be not null or empty")
-    @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
+    @NotEmpty(message = "fullName must be not null or empty")
+    @Size(min = 2, max = 50, message = "fullName must be more {min} and less than {max} characters")
     private String fullName;
 
-    @Size(min = 12, max = 12, message = "The field must be {max} characters")
+    @Size(min = 12, max = 12, message = "inn must be {max} characters")
     private String inn;
 
-    @Size(min = 9, max = 9, message = "The field must be {max} characters")
+    @Size(min = 9, max = 9, message = "kpp must be {max} characters")
     private String kpp;
 
-    @Size(max = 100, message = "The field must be less than {max} characters")
+    @Size(max = 100, message = "address must be less than {max} characters")
     private String address;
 
-    @Size(max = 20, message = "The field must be less than {max} characters")
+    @Size(max = 20, message = "phone must be less than {max} characters")
     private String phone;
 
     private Boolean isActive;
