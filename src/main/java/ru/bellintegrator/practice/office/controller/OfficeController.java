@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bellintegrator.practice.common.SuccessResponseResult;
 import ru.bellintegrator.practice.office.dto.FilteredOfficeList;
 import ru.bellintegrator.practice.office.dto.OfficeDto;
 import ru.bellintegrator.practice.office.dto.OfficeListFilterDto;
@@ -50,15 +49,13 @@ public class OfficeController {
 
     @ApiOperation(value = "Редактирование офиса", httpMethod = "POST")
     @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public SuccessResponseResult officeUpdate(@RequestBody @Valid OfficeDto officeDto) {
+    public void officeUpdate(@RequestBody @Valid OfficeDto officeDto) {
         officeService.updateOffice(officeDto);
-        return new SuccessResponseResult();
     }
 
     @ApiOperation(value = "Сохранение офиса", httpMethod = "POST")
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    public SuccessResponseResult officeSave(@RequestBody @Valid OfficeToSaveDto officeToSaveDto) {
+    public void officeSave(@RequestBody @Valid OfficeToSaveDto officeToSaveDto) {
         officeService.saveOffice(officeToSaveDto);
-        return new SuccessResponseResult();
     }
 }

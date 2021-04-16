@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bellintegrator.practice.common.SuccessResponseResult;
 import ru.bellintegrator.practice.user.dto.FilteredUserList;
 import ru.bellintegrator.practice.user.dto.UserByIdDto;
 import ru.bellintegrator.practice.user.dto.UserListFilterDto;
@@ -47,16 +46,14 @@ public class UserController {
 
     @ApiOperation(value = "Редактирование информации о пользователе", httpMethod = "POST")
     @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public SuccessResponseResult userUpdate(@RequestBody @Valid UserToUpdateDto userToUpdateDto) {
+    public void userUpdate(@RequestBody @Valid UserToUpdateDto userToUpdateDto) {
         userService.updateUser(userToUpdateDto);
-        return new SuccessResponseResult();
     }
 
     @ApiOperation(value = "Сохранение информации о пользователе", httpMethod = "POST")
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
-    public SuccessResponseResult userSave(@RequestBody @Valid UserToSaveDto user) {
+    public void userSave(@RequestBody @Valid UserToSaveDto user) {
         userService.saveUser(user);
-        return new SuccessResponseResult();
     }
 
 }

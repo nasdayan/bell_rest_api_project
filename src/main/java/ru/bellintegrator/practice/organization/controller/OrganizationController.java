@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bellintegrator.practice.common.SuccessResponseResult;
 import ru.bellintegrator.practice.organization.dto.FilteredOrganizations;
 import ru.bellintegrator.practice.organization.dto.OrganizationDto;
 import ru.bellintegrator.practice.organization.dto.OrganizationFilterDto;
@@ -56,16 +55,14 @@ public class OrganizationController {
 
     @ApiOperation(value = "Редактирование организации", httpMethod = "POST")
     @PostMapping(value = "/update")
-    public SuccessResponseResult organizationUpdate(@RequestBody @Valid OrganizationDto organizationDto) {
+    public void organizationUpdate(@RequestBody @Valid OrganizationDto organizationDto) {
         organizationService.updateOrganization(organizationDto);
-        return new SuccessResponseResult();
     }
 
     @ApiOperation(value = "Сохранение организации", httpMethod = "POST")
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public SuccessResponseResult organizationSave(@RequestBody @Valid OrganizationToSaveDto organizationToSaveDto) {
+    public void organizationSave(@RequestBody @Valid OrganizationToSaveDto organizationToSaveDto) {
         organizationService.saveOrganization(organizationToSaveDto);
-        return new SuccessResponseResult();
     }
 }
