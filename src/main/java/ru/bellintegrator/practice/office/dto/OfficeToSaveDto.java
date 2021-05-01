@@ -7,21 +7,36 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO для сохранения офиса
+ */
 @ApiModel(description = "Офис для сохранения")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OfficeToSaveDto {
 
+    /**
+     * Название офиса
+     */
     @NotEmpty(message = "name cannot be null or empty")
     @Size(min = 2, max = 100, message = "name must be more {min} and less than {max} characters")
     private String name;
 
+    /**
+     * Адрес офиса
+     */
     @NotEmpty(message = "address cannot be null or empty")
     @Size(min = 2, max = 100, message = "address must be more {min} and less than {max} characters")
     private String address;
 
+    /**
+     * Телефон офиса
+     */
     @Size(max = 50, message = "phone must be less than {max} characters")
     private String phone;
 
+    /**
+     * Статус активности офиса
+     */
     private Boolean isActive;
 
     @NotNull(message = "orgId cannot be null")

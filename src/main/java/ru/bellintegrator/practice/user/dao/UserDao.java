@@ -4,6 +4,9 @@ import ru.bellintegrator.practice.user.model.User;
 
 import java.util.List;
 
+/**
+ * DAO пользователя
+ */
 public interface UserDao {
 
     /**

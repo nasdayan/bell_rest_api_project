@@ -5,18 +5,33 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO для запроса списка офисов по фильтру
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OfficeListFilterDto {
 
+    /**
+     * ИД организации
+     */
     @NotNull(message = "orgId cannot be null")
     private Long orgId;
 
+    /**
+     * Название офиса
+     */
     @Size(min = 2, max = 100, message = "name must be more {min} and less than {max} characters")
     private String name;
 
+    /**
+     * Телефон офиса
+     */
     @Size(max = 50, message = "phone must be less than {max} characters")
     private String phone;
 
+    /**
+     * Статус активности офиса
+     */
     private Boolean isActive;
 
     public Long getOrgId() {

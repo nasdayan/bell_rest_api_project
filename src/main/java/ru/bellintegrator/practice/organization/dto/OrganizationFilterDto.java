@@ -6,16 +6,28 @@ import io.swagger.annotations.ApiModel;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO для запроса списка организаций по фильтру
+ */
 @ApiModel(description = "Фильтр для поиска организаций")
 public class OrganizationFilterDto {
 
+    /**
+     * Название организации
+     */
     @NotEmpty(message = "name must be not null or empty")
     @Size(min = 2, max = 50, message = "name must be more {min} and less than {max} characters")
     private String name;
 
+    /**
+     * ИНН организации
+     */
     @Size(min = 12, max = 12, message = "inn must be {max} characters")
     private String inn;
 
+    /**
+     * Статус активности организации
+     */
     private Boolean isActive;
 
     public String getName() {

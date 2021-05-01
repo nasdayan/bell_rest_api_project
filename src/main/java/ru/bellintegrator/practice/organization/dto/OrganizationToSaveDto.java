@@ -6,30 +6,54 @@ import io.swagger.annotations.ApiModel;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO для сохранения организации
+ */
 @ApiModel(description = "Организация для сохранения")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrganizationToSaveDto {
 
+    /**
+     * Название организации
+     */
     @NotEmpty(message = "name must be not null or empty")
     @Size(min = 2, max = 50, message = "The field must be more {min} and less than {max} characters")
     private String name;
 
+    /**
+     * Полное название организации
+     */
     @NotEmpty(message = "fullName must be not null or empty")
     @Size(min = 2, max = 50, message = "fullName must be more {min} and less than {max} characters")
     private String fullName;
 
+    /**
+     * ИНН организации
+     */
     @Size(min = 12, max = 12, message = "inn must be {max} characters")
     private String inn;
 
+    /**
+     * КПП организации
+     */
     @Size(min = 9, max = 9, message = "kpp must be {max} characters")
     private String kpp;
 
+    /**
+     * Адрес организации
+     */
     @Size(max = 100, message = "address must be less than {max} characters")
     private String address;
 
+    /**
+     * Телефон организации
+     */
     @Size(max = 20, message = "phone must be less than {max} characters")
     private String phone;
 
+    /**
+     * Статус активности организации
+     */
     private Boolean isActive;
 
     public String getName() {

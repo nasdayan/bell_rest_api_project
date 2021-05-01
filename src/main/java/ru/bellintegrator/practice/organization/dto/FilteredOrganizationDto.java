@@ -1,9 +1,23 @@
 package ru.bellintegrator.practice.organization.dto;
 
-public class FilteredOrganizations {
+/**
+ * DTO для получения отфильтрованного списка организаций
+ */
+public class FilteredOrganizationDto {
 
+    /**
+     * ИД организации
+     */
     private Long id;
+
+    /**
+     * Название организации
+     */
     private String name;
+
+    /**
+     * Статус активности организации
+     */
     private Boolean isActive;
 
     public Long getId() {

@@ -4,6 +4,9 @@ import ru.bellintegrator.practice.country.model.Country;
 
 import java.util.List;
 
+/**
+ * DAO страны
+ */
 public interface CountryDao {
     /**
      * Получение списка стран
@@ -12,7 +15,7 @@ public interface CountryDao {
     List<Country> countries();
 
     /**
-     * Получие страны по коду
+     * Получение страны по коду
      * @param code код страны
      * @return страна
      */

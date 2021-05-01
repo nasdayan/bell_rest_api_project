@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.bellintegrator.practice.common.mapper.MapperFacade;
 import ru.bellintegrator.practice.exception.ItemNotFoundException;
 import ru.bellintegrator.practice.organization.dao.OrganizationDao;
-import ru.bellintegrator.practice.organization.dto.FilteredOrganizations;
+import ru.bellintegrator.practice.organization.dto.FilteredOrganizationDto;
 import ru.bellintegrator.practice.organization.dto.OrganizationDto;
 import ru.bellintegrator.practice.organization.dto.OrganizationFilterDto;
 import ru.bellintegrator.practice.organization.dto.OrganizationToSaveDto;
@@ -28,13 +28,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FilteredOrganizations> getFilteredOrganizations(OrganizationFilterDto organizationFilterDto) {
+    public List<FilteredOrganizationDto> getFilteredOrganizations(OrganizationFilterDto organizationFilterDto) {
         Organization organization = mapperFacade.map(organizationFilterDto, Organization.class);
         List<Organization> organizations = organizationDao.getFilteredOrganizationList(organization);
-        if (organizations.isEmpty()) {
-            throw new ItemNotFoundException("Organizations with such parameters were not found");
-        }
-        return mapperFacade.mapAsList(organizations, FilteredOrganizations.class);
+        return mapperFacade.mapAsList(organizations, FilteredOrganizationDto.class);
     }
 
     @Override

@@ -77,9 +77,6 @@ public class UserServiceImpl implements UserService {
             user.setCountry(country);
         }
         List<User> users = userDao.getFilteredUserList(user);
-        if (users.isEmpty()) {
-            throw new ItemNotFoundException("Users with such params were not found");
-        }
         return mapperFacade.mapAsList(users, FilteredUserList.class);
     }
 

@@ -8,6 +8,9 @@ import ru.bellintegrator.practice.user.dto.UserToUpdateDto;
 
 import java.util.List;
 
+/**
+ * Сервис пользователя
+ */
 public interface UserService {
 
     /**

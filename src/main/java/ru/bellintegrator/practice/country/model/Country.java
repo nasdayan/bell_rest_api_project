@@ -12,25 +12,37 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
+/**
+ * Модель страны
+ */
 @Entity
 @Table(name = "Country")
 public class Country {
 
+    /**
+     * Ид страны
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    /**
+     * Код страны
+     */
     @Column(name = "citizenship_code", length = 3, nullable = false)
     private String citizenshipCode;
 
+    /**
+     * Название страны
+     */
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    @OneToMany(cascade = {
-            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
-        },
-            mappedBy = "country")
+    /**
+     * Список пользователей, относящихся ко стране
+     */
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "country")
     private List<User> users;
 
     public Long getId() {

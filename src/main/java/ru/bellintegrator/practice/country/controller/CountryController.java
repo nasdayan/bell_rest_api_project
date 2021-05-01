@@ -12,6 +12,9 @@ import ru.bellintegrator.practice.country.service.CountryService;
 
 import java.util.List;
 
+/**
+ * Контроллер для управление информацией о странах
+ */
 @Api(value = "CountryController", description = "Управление информацией о странах")
 @RestController
 @RequestMapping(value = "/api")
@@ -23,6 +26,10 @@ public class CountryController {
         this.countryService = countryService;
     }
 
+    /**
+     * Получение справочника стран
+     * @return список стран
+     */
     @ApiOperation(value = "Получение справочника стран", httpMethod = "POST")
     @PostMapping(value = "/countries", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CountryDto> countries() {

@@ -51,10 +51,8 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
     @Override
     public void updateOrganization(Organization organization) {
-
         Long id = organization.getId();
         Organization organizationDao =  entityManager.find(Organization.class, id);
-        organizationDao.setId(organization.getId());
         organizationDao.setName(organization.getName());
         organizationDao.setFullName(organization.getFullName());
         organizationDao.setInn(organization.getInn());

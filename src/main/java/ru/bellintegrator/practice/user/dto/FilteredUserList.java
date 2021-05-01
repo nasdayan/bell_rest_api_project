@@ -2,13 +2,35 @@ package ru.bellintegrator.practice.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * DTO для получения отфильтрованного списка пользователей
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FilteredUserList {
 
+    /**
+     * ИД пользователя
+     */
     private Long id;
+
+    /**
+     * Имя пользователя
+     */
     private String firstName;
+
+    /**
+     * Фамилия пользователя
+     */
     private String secondName;
+
+    /**
+     * Отчество пользователя
+     */
     private String middleName;
+
+    /**
+     * Должность пользователя
+     */
     private String position;
 
     public Long getId() {

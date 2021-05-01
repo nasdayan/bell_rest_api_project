@@ -8,25 +8,43 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO офиса
+ */
 @ApiModel(description = "Офис")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OfficeDto {
 
+    /**
+     * Ид офиса
+     */
     @NotNull
     @ApiModelProperty(value = "Уникальный идентификатор")
     private String id;
 
+    /**
+     * Название офиса
+     */
     @NotEmpty(message = "name must be not null or empty")
     @Size(min = 2, max = 100, message = "name must be more {min} and less than {max} characters")
     private String name;
 
+    /**
+     * Адрес офиса
+     */
     @NotEmpty(message = "address must be not null or empty")
     @Size(min = 2, max = 100, message = "address must be more {min} and less than {max} characters")
     private String address;
 
+    /**
+     * Телефон офиса
+     */
     @Size(max = 50, message = "phone must be less than {max} characters")
     private String phone;
 
+    /**
+     * Статус активности офиса
+     */
     private Boolean isActive;
 
     public String getId() {

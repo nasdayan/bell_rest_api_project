@@ -8,6 +8,9 @@ import ru.bellintegrator.practice.office.dto.OfficeToSaveDto;
 
 import java.util.List;
 
+/**
+ * Сервис офиса
+ */
 @Service
 public interface OfficeService {
 

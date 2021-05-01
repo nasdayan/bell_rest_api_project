@@ -17,36 +17,61 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import java.util.List;
 
+/**
+ * Модель офиса
+ */
 @Entity
 @Table(name = "Office")
 public class Office {
 
+    /**
+     * ИД офиса
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Служебное поле hibernate
+     */
     @Version
     private Integer version;
 
+    /**
+     * Название офиса
+     */
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
+    /**
+     * Телефон офиса
+     */
     @Column(name = "phone", length = 50)
     private String phone;
 
+    /**
+     * Адрес офиса
+     */
     @Column(name = "address", nullable = false, length = 100)
     private String address;
 
+    /**
+     * Статус активности офиса
+     */
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    /**
+     * Организация, к которой относится офис
+     */
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name = "org_id")
     private Organization organization;
 
-    @OneToMany(cascade = {
-            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
-    })
+    /**
+     * Список пользователей, которые относятся к офису
+     */
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "office_id")
     private List<User> users;
 

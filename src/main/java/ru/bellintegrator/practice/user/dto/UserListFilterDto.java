@@ -5,27 +5,51 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO для запроса отфильтрованного списка пользователей
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserListFilterDto {
 
+    /**
+     * Ид офиса, к которому относится пользователь
+     */
     @NotEmpty(message = "officeId must be not null or empty")
     private Long officeId;
 
+    /**
+     * Имя пользователя
+     */
     @Size(min = 2, max = 50, message = "firstName must be more {min} and less than {max} characters")
     private String firstName;
 
+    /**
+     * Фамилия пользователя
+     */
     @Size(min = 2, max = 50, message = "secondName must be more {min} and less than {max} characters")
     private String secondName;
 
+    /**
+     * Отчество пользователя
+     */
     @Size(min = 2, max = 50, message = "middleName must be more {min} and less than {max} characters")
     private String middleName;
 
+    /**
+     * Должность пользователя
+     */
     @Size(max = 50, message = "position must be less than {max} characters")
     private String position;
 
+    /**
+     * Код документа пользователя
+     */
     @Size(min = 2, max = 2, message = "docCode must be {max} characters")
     private String docCode;
 
+    /**
+     * Код страны пользователя
+     */
     @Size(min = 3, max = 3, message = "citizenshipCode must be {max} characters")
     private String citizenshipCode;
 

@@ -1,5 +1,8 @@
 package ru.bellintegrator.practice.aspect;
 
+/**
+ * Объект, возвращаемый при ошибочном выполнении запроса
+ */
 public class ResponseError {
 
     private String error;

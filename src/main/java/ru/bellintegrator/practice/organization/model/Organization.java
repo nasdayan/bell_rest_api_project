@@ -14,10 +14,16 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import java.util.List;
 
+/**
+ * Модель организации
+ */
 @Entity
 @Table(name = "Organization")
 public class Organization {
 
+    /**
+     * ИД организации
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,35 +35,52 @@ public class Organization {
     @Version
     private Integer version;
 
+    /**
+     * Название организации
+     */
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
+    /**
+     * Полное название организации
+     */
     @Column(name = "fullName", nullable = false, length = 50)
     private String fullName;
 
+    /**
+     * ИНН организации
+     */
     @Column(name = "inn", nullable = false, length = 12)
     private String inn;
 
+    /**
+     * КПП организации
+     */
     @Column(name = "kpp", nullable = false, length = 9)
     private String kpp;
 
+    /**
+     * Адрес организации
+     */
     @Column(name = "address", nullable = false, length = 100)
     private String address;
 
+    /**
+     * Телефон организации
+     */
     @Column(name = "phone", length = 20)
     private String phone;
 
+    /**
+     * Статус активности организации
+     */
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @OneToMany(cascade = {
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
-            CascadeType.DETACH,
-            CascadeType.REFRESH
-        },
-            fetch = FetchType.LAZY,
-            mappedBy = "organization")
+    /**
+     * Список офисов, относящихся к организации
+     */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "organization")
     private List<Office> offices;
 
     public Long getId() {

@@ -2,11 +2,25 @@ package ru.bellintegrator.practice.office.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * DTO для получения отфильтрованного списка офисов
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FilteredOfficeList {
 
+    /**
+     * Ид офиса
+     */
     private Long id;
+
+    /**
+     * Название офиса
+     */
     private String name;
+
+    /**
+     * Статус активности офиса
+     */
     private Boolean isActive;
 
     public Long getId() {

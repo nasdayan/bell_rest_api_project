@@ -4,6 +4,9 @@ import ru.bellintegrator.practice.doc.model.Doc;
 
 import java.util.List;
 
+/**
+ * DAO документа
+ */
 public interface DocDao {
     /**
      * Получение списка возможных документов из справочника

@@ -16,10 +16,16 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import java.util.Date;
 
+/**
+ * Модель документа пользователя
+ */
 @Entity
 @Table(name = "user_doc")
 public class UserDoc {
 
+    /**
+     * ИД документа пользователя
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,18 +36,28 @@ public class UserDoc {
     @Version
     private Integer version;
 
+    /**
+     * Номер документа пользователя
+     */
     @Column(name = "doc_number")
     private String docNumber;
 
+    /**
+     * Дата выдачи документа пользователя
+     */
     @Column(name = "doc_date")
     private Date docDate;
 
+    /**
+     * Пользователь, который относится к документу пользователя
+     */
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userDoc")
     private User user;
 
-    @ManyToOne(cascade = {
-            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
-    })
+    /**
+     * Документ (из справочника документов), относящийся к документу пользователя
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "doc_id")
     private Doc doc;
 

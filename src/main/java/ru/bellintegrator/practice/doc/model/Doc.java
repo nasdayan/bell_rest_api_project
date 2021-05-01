@@ -12,24 +12,37 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
+/**
+ * Модель документа
+ */
 @Entity
 @Table(name = "Doc")
 public class Doc {
 
+    /**
+     * Ид документа
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    /**
+     * Название документа
+     */
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    /**
+     * Код документа
+     */
     @Column(name = "code", length = 2, nullable = false)
     private String code;
 
-    @OneToMany(cascade = {
-            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
-    }, mappedBy = "doc")
+    /**
+     * Список документов пользователя, относящихся к справочнику документов
+     */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doc")
     private List<UserDoc> userDocs;
 
     public Long getId() {

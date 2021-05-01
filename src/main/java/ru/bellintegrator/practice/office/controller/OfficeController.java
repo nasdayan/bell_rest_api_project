@@ -21,6 +21,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 
+/**
+ * Контроллер для управления информацией об офисах
+ */
 @Api(value = "OfficeController", description = "Управление информацией об офисах")
 @Validated
 @RestController
@@ -34,25 +37,42 @@ public class OfficeController {
         this.officeService = officeService;
     }
 
+    /**
+     * Получение списка офисов
+     * @param officeListFilterDto фильтр
+     * @return список офисов
+     */
     @ApiOperation(value = "Получение списка офисов", httpMethod = "POST")
     @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FilteredOfficeList> officeList(@RequestBody @Valid OfficeListFilterDto officeListFilterDto) {
         return officeService.getFilteredOfficeList(officeListFilterDto);
     }
 
+    /**
+     * Получение офиса по id
+     * @param id ИД офиса
+     * @return офис
+     */
     @ApiOperation(value = "Получение офиса по id", httpMethod = "GET")
-    //todo id validation
     @GetMapping(value = "/list/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public OfficeDto officeById(@PathVariable @Min(1) Long id) {
         return officeService.getOfficeById(id);
     }
 
+    /**
+     * Редактирование офиса
+     * @param officeDto офис, который треб-ся отредактировать
+     */
     @ApiOperation(value = "Редактирование офиса", httpMethod = "POST")
     @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public void officeUpdate(@RequestBody @Valid OfficeDto officeDto) {
         officeService.updateOffice(officeDto);
     }
 
+    /**
+     * Сохранение офиса
+     * @param officeToSaveDto офис, который треб-ся сохранить
+     */
     @ApiOperation(value = "Сохранение офиса", httpMethod = "POST")
     @PostMapping(value = "/save", produces = MediaType.APPLICATION_JSON_VALUE)
     public void officeSave(@RequestBody @Valid OfficeToSaveDto officeToSaveDto) {

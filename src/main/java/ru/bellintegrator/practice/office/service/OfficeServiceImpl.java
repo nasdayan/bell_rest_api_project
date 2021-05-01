@@ -37,7 +37,6 @@ public class OfficeServiceImpl implements OfficeService {
         if (organization == null) {
             throw new ItemNotFoundException("Organizations with this identifier were not found");
         }
-        //        Office office = mapperFacade.map(officeListFilter, Office.class);
         Office office = new Office();
         office.setOrganization(organization);
         if (officeListFilterDto.getName() != null) {
@@ -50,9 +49,6 @@ public class OfficeServiceImpl implements OfficeService {
             office.setIsActive(officeListFilterDto.getIsActive());
         }
         List<Office> officeList = officeDao.getOfficeFilteredList(office);
-        if (officeList.isEmpty()) {
-            throw new ItemNotFoundException("Offices with this params were not found");
-        }
         return mapperFacade.mapAsList(officeList, FilteredOfficeList.class);
     }
 

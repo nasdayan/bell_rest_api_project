@@ -17,10 +17,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * Модель пользователя
+ */
 @Entity
 @Table(name = "User")
 public class User {
 
+    /**
+     * ИД пользователя
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,37 +37,60 @@ public class User {
     @Version
     private Integer version;
 
+    /**
+     * Имя пользователя
+     */
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
+    /**
+     * Фамилия пользователя
+     */
     @Column(name = "second_name", length = 50)
     private String secondName;
 
+    /**
+     * Отчество пользователя
+     */
     @Column(name = "middle_name", length = 50)
     private String middleName;
 
+    /**
+     * Должность пользователя
+     */
     @Column(name = "position", length = 50, nullable = false)
     private String position;
 
+    /**
+     * Телефон пользователя
+     */
     @Column(name = "phone", length = 20)
     private String phone;
 
+    /**
+     * Статус идентификации пользователя
+     */
     @Column(name = "is_identified")
     private Boolean isIdentified;
 
-    @ManyToOne(cascade = {
-            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
-    }, fetch = FetchType.LAZY)
+    /**
+     * Страна, к которой относится пользователь
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
 
+    /**
+     * Документ пользователя, который относится к пользователю
+     */
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_doc_id")
     private UserDoc userDoc;
 
-    @ManyToOne(cascade = {
-            CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH
-    }, fetch = FetchType.LAZY)
+    /**
+     * Офис, который относится к пользователю
+     */
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "office_id")
     private Office office;
 

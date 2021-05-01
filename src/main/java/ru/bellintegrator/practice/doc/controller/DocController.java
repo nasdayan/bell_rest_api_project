@@ -2,8 +2,6 @@ package ru.bellintegrator.practice.doc.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +12,9 @@ import ru.bellintegrator.practice.doc.service.DocService;
 
 import java.util.List;
 
+/**
+ * Контроллер для управления информацией о документах
+ */
 @Api(value = "DocController", description = "Управление информацией о документах")
 @RestController
 @RequestMapping(value = "/api")
@@ -26,12 +27,11 @@ public class DocController {
         this.docService = docService;
     }
 
+    /**
+     * Получение справочника документов
+     * @return список документов
+     */
     @ApiOperation(value = "Получение справочника документов", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = DocDto.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")
-    })
     @PostMapping(value = "/docs", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DocDto> documents() {
         return docService.documents();

@@ -1,5 +1,8 @@
 package ru.bellintegrator.practice.aspect;
 
+/**
+ * Ответ, возвращаемый при запросе
+ */
 public class ResponseToUser {
 
     private Object data;

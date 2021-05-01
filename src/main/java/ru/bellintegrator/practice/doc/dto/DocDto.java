@@ -1,8 +1,18 @@
 package ru.bellintegrator.practice.doc.dto;
 
+/**
+ * DTO документа
+ */
 public class DocDto {
 
+    /**
+     * Код документа
+     */
     private String code;
+
+    /**
+     * Название документа
+     */
     private String name;
 
     public String getCode() {
