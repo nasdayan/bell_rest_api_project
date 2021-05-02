@@ -42,7 +42,7 @@ public class UserController {
      */
     @ApiOperation(value = "Получение списка пользователей", httpMethod = "POST")
     @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<FilteredUserList> users(@RequestBody UserListFilterDto userFilter) {
+    public List<FilteredUserList> users(@RequestBody @Valid UserListFilterDto userFilter) {
         return userService.getFilteredUserList(userFilter);
     }
 

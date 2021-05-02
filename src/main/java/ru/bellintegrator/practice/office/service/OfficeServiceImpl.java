@@ -32,7 +32,6 @@ public class OfficeServiceImpl implements OfficeService {
 
     @Override
     public List<FilteredOfficeList> getFilteredOfficeList(OfficeListFilterDto officeListFilterDto) {
-
         Organization organization = organizationDao.getOrganizationById(officeListFilterDto.getOrgId());
         if (organization == null) {
             throw new ItemNotFoundException("Organizations with this identifier were not found");
@@ -55,7 +54,6 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional(readOnly = true)
     public OfficeDto getOfficeById(Long id) {
-
         Office office = officeDao.getOfficeById(id);
         if (office == null) {
             throw new ItemNotFoundException("Office with this identifier was not found");
@@ -66,8 +64,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void updateOffice(OfficeDto officeDto) {
-
-        Office office = officeDao.getOfficeById(Long.parseLong(officeDto.getId()));
+        Office office = officeDao.getOfficeById(officeDto.getId());
         if (office == null) {
             throw new ItemNotFoundException("Office with this identifier was not found");
         }

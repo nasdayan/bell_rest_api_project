@@ -30,18 +30,21 @@ public class OrganizationToSaveDto {
     /**
      * ИНН организации
      */
+    @NotEmpty(message = "inn must be not null or empty")
     @Size(min = 12, max = 12, message = "inn must be {max} characters")
     private String inn;
 
     /**
      * КПП организации
      */
+    @NotEmpty(message = "kpp must be not null or empty")
     @Size(min = 9, max = 9, message = "kpp must be {max} characters")
     private String kpp;
 
     /**
      * Адрес организации
      */
+    @NotEmpty(message = "address must be not null or empty")
     @Size(max = 100, message = "address must be less than {max} characters")
     private String address;
 

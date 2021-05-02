@@ -2,7 +2,7 @@ package ru.bellintegrator.practice.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -14,7 +14,7 @@ public class UserListFilterDto {
     /**
      * Ид офиса, к которому относится пользователь
      */
-    @NotEmpty(message = "officeId must be not null or empty")
+    @NotNull(message = "officeId must be not null")
     private Long officeId;
 
     /**

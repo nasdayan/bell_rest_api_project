@@ -20,7 +20,7 @@ public class OfficeDto {
      */
     @NotNull
     @ApiModelProperty(value = "Уникальный идентификатор")
-    private String id;
+    private Long id;
 
     /**
      * Название офиса
@@ -47,11 +47,11 @@ public class OfficeDto {
      */
     private Boolean isActive;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
