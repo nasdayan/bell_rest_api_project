@@ -45,11 +45,11 @@ CREATE table Doc (
 COMMENT ON TABLE Doc IS 'Справочник документов';
 
 CREATE table User_doc (
-      id           INTEGER             COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
-      version      INTEGER NOT NULL    COMMENT 'Служебное поле hibernate',
-      doc_id       INTEGER             COMMENT 'Внешний ключ к таблице doc',
-      doc_number   VARCHAR(50)         COMMENT 'Номер документа',
-      doc_date     DATE                COMMENT 'Дата выдачи документа'
+    user_id     INTEGER              COMMENT 'Уникальный идентификатор пользователя, которому принадлежит документ' PRIMARY KEY,
+    version      INTEGER NOT NULL    COMMENT 'Служебное поле hibernate',
+    doc_id       INTEGER             COMMENT 'Внешний ключ к таблице doc',
+    doc_number   VARCHAR(50)         COMMENT 'Номер документа',
+    doc_date     DATE                COMMENT 'Дата выдачи документа'
 );
 COMMENT ON TABLE User_doc IS 'Документ пользователя';
 
@@ -62,9 +62,6 @@ COMMENT ON TABLE Country IS 'Справочник стран';
 
 ALTER TABLE Office ADD FOREIGN KEY (org_id) REFERENCES Organization(id);
 CREATE INDEX IX_Office_org_id on Office(org_id);
-
-ALTER TABLE User add foreign key (user_doc_id) references User_doc(id);
-CREATE INDEX IX_User_user_doc_id on User(user_doc_id);
 
 ALTER TABLE User add foreign key (office_id) references Office(id);
 CREATE INDEX IX_User_office_id on User(office_id);

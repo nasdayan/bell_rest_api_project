@@ -35,11 +35,11 @@ INSERT into Country (id, citizenship_code, name) VALUES (4, '333', 'США');
 
 INSERT into Country (id, citizenship_code, name) VALUES (5, '355', 'Финляндия');
 
-INSERT into User_doc(id, version, doc_id, doc_number, doc_date) VALUES (1, 0, 1, '3451341', DATE '2004-12-31');
+INSERT into User_doc(user_id, version, doc_id, doc_number, doc_date) VALUES (1, 0, 1, '3451341', DATE '2004-12-31');
 
-INSERT into User_doc(id, version, doc_id, doc_number, doc_date) VALUES (2, 0, 2, '342525', DATE '2005-10-04');
+INSERT into User_doc(user_id, version, doc_id, doc_number, doc_date) VALUES (2, 0, 2, '342525', DATE '2005-10-04');
 
-INSERT into User_doc(id, version, doc_id, doc_number, doc_date) VALUES (3, 0, 3, '123658', DATE '2006-11-07');
+INSERT into User_doc(user_id, version, doc_id, doc_number, doc_date) VALUES (3, 0, 3, '123658', DATE '2006-11-07');
 
 INSERT into User (id, version, first_name, second_name, middle_name, position, phone, user_doc_id, office_id, country_id, is_identified)
 VALUES (1, 0, 'Олег', 'Иванов', 'Иванович', 'CEO', '3243423434', 1, 1, 1, TRUE);
