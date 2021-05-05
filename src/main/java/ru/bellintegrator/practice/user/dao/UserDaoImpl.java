@@ -2,7 +2,6 @@ package ru.bellintegrator.practice.user.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.bellintegrator.practice.common.mapper.MapperFacade;
 import ru.bellintegrator.practice.exception.ItemNotFoundException;
 import ru.bellintegrator.practice.user.model.User;
 
@@ -18,12 +17,10 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private final EntityManager entityManager;
-    private final MapperFacade mapperFacade;
 
     @Autowired
-    public UserDaoImpl(EntityManager entityManager, MapperFacade mapperFacade) {
+    public UserDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.mapperFacade = mapperFacade;
     }
 
     @Override
@@ -71,8 +68,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        Long id = user.getId();
-        User userDao = entityManager.find(User.class, id);
-        mapperFacade.map(user, userDao);
+        entityManager.merge(user);
     }
 }

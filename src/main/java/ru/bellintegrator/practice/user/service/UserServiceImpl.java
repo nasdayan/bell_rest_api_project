@@ -48,18 +48,7 @@ public class UserServiceImpl implements UserService {
             throw new ItemNotFoundException("Office with this identifier was not found");
         }
         user.setOffice(office);
-        if (userFilter.getFirstName() != null) {
-            user.setFirstName(userFilter.getFirstName());
-        }
-        if (userFilter.getSecondName() != null) {
-            user.setSecondName(userFilter.getSecondName());
-        }
-        if (userFilter.getMiddleName() != null) {
-            user.setMiddleName(userFilter.getMiddleName());
-        }
-        if (userFilter.getPosition() != null) {
-            user.setPosition(userFilter.getPosition());
-        }
+        mapMainUserInfoFromDtoToEntity(user, userFilter.getFirstName(), userFilter.getSecondName(), userFilter.getMiddleName(), userFilter.getPosition(), null);
         if (userFilter.getDocCode() != null) {
             Doc doc = docDao.getDocByDocCode(userFilter.getDocCode());
             if (doc == null) {
@@ -102,6 +91,16 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(UserToUpdateDto userToUpdateDto) {
+        userDao.updateUser(mapUserToUpdateDtoToUserEntity(userToUpdateDto));
+    }
+
+    @Override
+    @Transactional
+    public void saveUser(UserToSaveDto userToSaveDto) {
+        userDao.saveUser(mapUserToSaveDtoToUserEntity(userToSaveDto));
+    }
+
+    private User mapUserToUpdateDtoToUserEntity(UserToUpdateDto userToUpdateDto) {
         User user = userDao.getUserById(userToUpdateDto.getId());
         if (user == null) {
             throw new ItemNotFoundException("User with such identifier was not found");
@@ -113,17 +112,7 @@ public class UserServiceImpl implements UserService {
             }
             user.setOffice(office);
         }
-        user.setFirstName(userToUpdateDto.getFirstName());
-        if (userToUpdateDto.getSecondName() != null) {
-            user.setSecondName(userToUpdateDto.getSecondName());
-        }
-        if (userToUpdateDto.getMiddleName() != null) {
-            user.setMiddleName(userToUpdateDto.getMiddleName());
-        }
-        user.setPosition(userToUpdateDto.getPosition());
-        if (userToUpdateDto.getPhone() != null) {
-            user.setPhone(userToUpdateDto.getPhone());
-        }
+        mapMainUserInfoFromDtoToEntity(user, userToUpdateDto.getFirstName(), userToUpdateDto.getSecondName(), userToUpdateDto.getMiddleName(), userToUpdateDto.getPosition(), userToUpdateDto.getPhone());
         if (userToUpdateDto.getDocName() != null || userToUpdateDto.getDocDate() != null || userToUpdateDto.getDocNumber() != null) {
             UserDoc userDoc = user.getUserDoc() == null ? new UserDoc() : user.getUserDoc();
             if (userToUpdateDto.getDocName() != null) {
@@ -149,29 +138,17 @@ public class UserServiceImpl implements UserService {
             Country country = countryDao.getCountryByCitizenshipCode(userToUpdateDto.getCitizenshipCode());
             user.setCountry(country);
         }
-        userDao.saveUser(user);
+        return user;
     }
 
-    @Override
-    @Transactional
-    public void saveUser(UserToSaveDto userToSaveDto) {
+    private User mapUserToSaveDtoToUserEntity(UserToSaveDto userToSaveDto) {
         User user = new User();
         Office office = officeDao.getOfficeById(userToSaveDto.getOfficeId());
         if (office == null) {
             throw new ItemNotFoundException("Office with this identifier was not found");
         }
         user.setOffice(office);
-        user.setFirstName(userToSaveDto.getFirstName());
-        if (userToSaveDto.getSecondName() != null) {
-            user.setSecondName(userToSaveDto.getSecondName());
-        }
-        if (userToSaveDto.getMiddleName() != null) {
-            user.setMiddleName(userToSaveDto.getMiddleName());
-        }
-        user.setPosition(userToSaveDto.getPosition());
-        if (userToSaveDto.getPhone() != null) {
-            user.setPhone(userToSaveDto.getPhone());
-        }
+        mapMainUserInfoFromDtoToEntity(user, userToSaveDto.getFirstName(), userToSaveDto.getSecondName(), userToSaveDto.getMiddleName(), userToSaveDto.getPosition(), userToSaveDto.getPhone());
         if (userToSaveDto.getDocCode() != null) {
             Doc doc = docDao.getDocByDocCode(userToSaveDto.getDocCode());
             if (doc == null) {
@@ -211,6 +188,24 @@ public class UserServiceImpl implements UserService {
             }
             user.setCountry(country);
         }
-        userDao.saveUser(user);
+        return user;
+    }
+
+    private void mapMainUserInfoFromDtoToEntity(User user, String firstName, String secondName, String middleName, String position, String phone) {
+        if (firstName != null) {
+            user.setFirstName(firstName);
+        }
+        if (secondName != null) {
+            user.setSecondName(secondName);
+        }
+        if (middleName != null) {
+            user.setMiddleName(middleName);
+        }
+        if (position != null) {
+            user.setPosition(position);
+        }
+        if (phone != null) {
+            user.setPhone(phone);
+        }
     }
 }
