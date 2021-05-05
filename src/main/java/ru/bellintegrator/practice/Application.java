@@ -56,9 +56,9 @@ public class Application {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring REST Sample with Swagger")
+                .title("Bell Integrator REST API project")
                 .description("Spring REST Sample with Swagger")
-                .contact("https://github.com/azEsm/empty_project")
+                .contact("https://github.com/nasdayan")
                 .version("1.0")
                 .build();
     }
