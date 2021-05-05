@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
@@ -56,7 +57,7 @@ public class OfficeControllerTest {
                 .content(objectMapper.writeValueAsString(filter)))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Organizations with this identifier were not found"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.NOT_FOUND + ". " + "Organizations with this identifier were not found"));
     }
 
     @Test
@@ -74,7 +75,7 @@ public class OfficeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/office/list/7777"))
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Office with this identifier was not found"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.NOT_FOUND + ". " + "Office with this identifier was not found"));
     }
 
     @Test
@@ -95,17 +96,17 @@ public class OfficeControllerTest {
 
     @Test
     @DirtiesContext
-    public void officeUpdateWithEmptyAddressTest() throws Exception {
+    public void officeUpdateWithWrongAddressTest() throws Exception {
         OfficeDto office = new OfficeDto();
         office.setId(1L);
         office.setName("Башнефть 777");
-        office.setAddress("");
+        office.setAddress("A");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/office/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(office)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("address must be not null or empty; address must be more 2 and less than 100 characters"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.BAD_REQUEST + ". " + "address must be more 2 and less than 100 characters"));
     }
 
     @Test
@@ -136,6 +137,6 @@ public class OfficeControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(office)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("name must be more 2 and less than 100 characters"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.BAD_REQUEST + ". " + "name must be more 2 and less than 100 characters"));
     }
 }

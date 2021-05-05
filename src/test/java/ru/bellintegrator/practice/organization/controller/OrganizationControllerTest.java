@@ -30,7 +30,7 @@ public class OrganizationControllerTest {
                 "  \"isActive\": true,\n" +
                 "  \"name\": \"Башнефть\"\n" +
                 "}";
-        String jsonInnErrorValidationResponse = "{\"error\":\"inn must be 12 characters\"}";
+        String jsonInnErrorValidationResponse = "{\"error\":\"Код ошибки: 400. inn must be 12 characters\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/organization/list").content(jsonRequest).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.content().json(jsonInnErrorValidationResponse));
@@ -39,7 +39,7 @@ public class OrganizationControllerTest {
     @Test
     public void organizationsWithWrongNameTest() throws Exception {
         String jsonRequest = "{\"name\": \"Б\" }";
-        String jsonInnErrorValidationResponse = "{\"error\":\"name must be more 2 and less than 50 characters\"}";
+        String jsonInnErrorValidationResponse = "{\"error\":\"Код ошибки: 400. name must be more 2 and less than 50 characters\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/organization/list").content(jsonRequest).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.content().json(jsonInnErrorValidationResponse));
@@ -72,7 +72,7 @@ public class OrganizationControllerTest {
 
     @Test
     public void organizationByWrongIdTest() throws Exception {
-        String jsonResponse = "{\"error\":\"Organization with this id was not found\"}";
+        String jsonResponse = "{\"error\":\"Код ошибки: 404. Organization with this id was not found\"}";
         mockMvc.perform(MockMvcRequestBuilders.get("/api/organization/list/35345"))
                 .andExpect(MockMvcResultMatchers.status().is(404))
                 .andExpect(MockMvcResultMatchers.content().json(jsonResponse));
@@ -113,7 +113,7 @@ public class OrganizationControllerTest {
                 "    \"phone\": \"834523451\",\n" +
                 "    \"isActive\": \"true\"\n" +
                 "}";
-        String response = "{\"error\":\"kpp must be 9 characters\"}";
+        String response = "{\"error\":\"Код ошибки: 400. kpp must be 9 characters\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/organization/update").content(request).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.content().json(response));
@@ -147,7 +147,7 @@ public class OrganizationControllerTest {
                 "    \"phone\": \"834523451\",\n" +
                 "    \"isActive\": \"true\"\n" +
                 "}";
-        String response = "{\"error\":\"address must be not null or empty\"}";
+        String response = "{\"error\":\"Код ошибки: 400. address must be not null or empty\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/organization/save").content(request).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().json(response));

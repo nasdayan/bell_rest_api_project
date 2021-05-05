@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
@@ -56,7 +57,7 @@ public class UserControllerTest {
                 .content(objectMapper.writeValueAsString(filter)))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Office with this identifier was not found"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.NOT_FOUND + ". " + "Office with this identifier was not found"));
     }
 
     @Test
@@ -70,7 +71,7 @@ public class UserControllerTest {
                 .content(objectMapper.writeValueAsString(filter)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("secondName must be more 2 and less than 50 characters"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.BAD_REQUEST + ". " + "secondName must be more 2 and less than 50 characters"));
     }
 
     @Test
@@ -87,7 +88,7 @@ public class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/user/787878"))
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().is(404))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("User with this identifier was not found"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.NOT_FOUND + ". " + "User with this identifier was not found"));
     }
 
     @Test
@@ -113,7 +114,7 @@ public class UserControllerTest {
         user.setId(666L);
         user.setFirstName("Fedor");
         user.setPosition("engineer");
-        String response = "{\"error\":\"User with such identifier was not found\"}";
+        String response = "{\"error\":\"Код ошибки: 404. User with such identifier was not found\"}";
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/user/update")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -153,7 +154,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("firstName must be more 2 and less than 50 characters"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.BAD_REQUEST + ". " + "firstName must be more 2 and less than 50 characters"));
     }
 
     @Test
@@ -168,6 +169,6 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Office with this identifier was not found"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.NOT_FOUND + ". " + "Office with this identifier was not found"));
     }
 }
