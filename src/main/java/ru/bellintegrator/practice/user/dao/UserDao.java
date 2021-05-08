@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.user.dao;
 
+import ru.bellintegrator.practice.user.dto.UserListFilterDto;
 import ru.bellintegrator.practice.user.model.User;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface UserDao {
      * @param filter фильтр
      * @return список пользователей
      */
-    List<User> getFilteredUserList(User filter);
+    List<User> getFilteredUserList(UserListFilterDto filter);
 
     /**
      * Получение пользователя по ид

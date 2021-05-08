@@ -21,7 +21,7 @@ public class ExceptionHandlerAdvice {
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseError handle(Exception exception) {
         logger.error("Код ошибки: " + HttpStatus.INTERNAL_SERVER_ERROR + ". " + exception.getMessage());
-        return new ResponseError("Код ошибки: " + HttpStatus.INTERNAL_SERVER_ERROR + ". " + exception.getMessage());
+        return new ResponseError("Код ошибки: " + HttpStatus.INTERNAL_SERVER_ERROR + ". " + "Ошибка сервера. Обратитесь к разработчику API за решением проблемы.");
     }
 
     @ExceptionHandler(ItemNotFoundException.class)

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * DTO для получения отфильтрованного списка пользователей
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FilteredUserList {
+public class FilteredUserDto {
 
     /**
      * ИД пользователя

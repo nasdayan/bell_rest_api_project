@@ -2,7 +2,7 @@ package ru.bellintegrator.practice.user.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.bellintegrator.practice.exception.ItemNotFoundException;
+import ru.bellintegrator.practice.user.dto.UserListFilterDto;
 import ru.bellintegrator.practice.user.model.User;
 
 import javax.persistence.EntityManager;
@@ -24,15 +24,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getFilteredUserList(User filter) {
+    public List<User> getFilteredUserList(UserListFilterDto filter) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> userRoot = criteriaQuery.from(User.class);
-        Predicate predicate = criteriaBuilder.equal(userRoot.get("office").get("id"), filter.getOffice().getId());
-        if (predicate == null) {
-            throw new ItemNotFoundException("Office with this identifier was not found");
-        }
+        Predicate predicate = criteriaBuilder.equal(userRoot.get("office").get("id"), filter.getOfficeId());
         if (filter.getFirstName() != null) {
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(userRoot.get("firstName"), filter.getFirstName()));
         }
@@ -45,11 +42,11 @@ public class UserDaoImpl implements UserDao {
         if (filter.getPosition() != null) {
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(userRoot.get("position"), filter.getPosition()));
         }
-        if (filter.getUserDoc() != null && filter.getUserDoc().getDoc() != null && filter.getUserDoc().getDoc().getCode() != null) {
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(userRoot.get("userDoc").get("doc").get("code"), filter.getUserDoc().getDoc().getCode()));
+        if (filter.getDocCode() != null) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(userRoot.get("userDoc").get("doc").get("code"), filter.getDocCode()));
         }
-        if (filter.getCountry() != null && filter.getCountry().getCitizenshipCode() != null) {
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(userRoot.get("country").get("citizenshipCode"), filter.getCountry().getCitizenshipCode()));
+        if (filter.getCitizenshipCode() != null) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(userRoot.get("country").get("citizenshipCode"), filter.getCitizenshipCode()));
         }
         criteriaQuery.select(userRoot).where(predicate);
         TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
@@ -68,6 +65,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        entityManager.merge(user);
+        Long id = user.getId();
+        User userDao = entityManager.find(User.class, id);
+        userDao.setId(id);
+        userDao.setFirstName(user.getFirstName());
+        userDao.setSecondName(user.getSecondName());
+        userDao.setMiddleName(user.getMiddleName());
+        userDao.setOffice(user.getOffice());
+        userDao.setPhone(user.getPhone());
+        userDao.setUserDoc(user.getUserDoc());
+        userDao.setCountry(user.getCountry());
+        userDao.setIdentified(user.getIdentified());
     }
 }

@@ -3,6 +3,7 @@ package ru.bellintegrator.practice.office.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.exception.ItemNotFoundException;
+import ru.bellintegrator.practice.office.dto.OfficeListFilterDto;
 import ru.bellintegrator.practice.office.model.Office;
 
 import javax.persistence.EntityManager;
@@ -29,11 +30,11 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public List<Office> getOfficeFilteredList(Office filter) {
+    public List<Office> getOfficeFilteredList(OfficeListFilterDto filter) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Office> criteriaQuery = criteriaBuilder.createQuery(Office.class);
         Root<Office> officeRoot = criteriaQuery.from(Office.class);
-        Predicate predicate = criteriaBuilder.equal(officeRoot.get("organization").get("id"), filter.getOrganization().getId());
+        Predicate predicate = criteriaBuilder.equal(officeRoot.get("organization").get("id"), filter.getOrgId());
         if (predicate == null) {
             throw new ItemNotFoundException("Organization with this identifier was not found");
         }

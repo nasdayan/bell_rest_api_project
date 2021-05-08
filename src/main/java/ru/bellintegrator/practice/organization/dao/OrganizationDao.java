@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.organization.dao;
 
+import ru.bellintegrator.practice.organization.dto.OrganizationFilterDto;
 import ru.bellintegrator.practice.organization.model.Organization;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface OrganizationDao {
      * @param filter фильтр
      * @return список организаций
      */
-    List<Organization> getFilteredOrganizationList(Organization filter);
+    List<Organization> getFilteredOrganizationList(OrganizationFilterDto filter);
 
     /**
      * Получение организации по Ид

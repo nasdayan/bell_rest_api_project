@@ -14,9 +14,9 @@ public interface OrganizationService {
     /**
      * Получение списка организаций
      * @return список организаций
-     * @param organizationFilterDto фильтр организаций
+     * @param filter фильтр организаций
      */
-    List<FilteredOrganizationDto> getFilteredOrganizations(OrganizationFilterDto organizationFilterDto);
+    List<FilteredOrganizationDto> getFilteredOrganizations(OrganizationFilterDto filter);
 
     /**
      * Получение организации по ИД

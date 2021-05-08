@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bellintegrator.practice.user.dto.FilteredUserList;
+import ru.bellintegrator.practice.user.dto.FilteredUserDto;
 import ru.bellintegrator.practice.user.dto.UserByIdDto;
 import ru.bellintegrator.practice.user.dto.UserListFilterDto;
 import ru.bellintegrator.practice.user.dto.UserToSaveDto;
@@ -42,7 +42,7 @@ public class UserController {
      */
     @ApiOperation(value = "Получение списка пользователей", httpMethod = "POST")
     @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<FilteredUserList> users(@RequestBody @Valid UserListFilterDto userFilter) {
+    public List<FilteredUserDto> users(@RequestBody @Valid UserListFilterDto userFilter) {
         return userService.getFilteredUserList(userFilter);
     }
 

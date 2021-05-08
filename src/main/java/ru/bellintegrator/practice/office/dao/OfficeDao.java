@@ -1,5 +1,6 @@
 package ru.bellintegrator.practice.office.dao;
 
+import ru.bellintegrator.practice.office.dto.OfficeListFilterDto;
 import ru.bellintegrator.practice.office.model.Office;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public interface OfficeDao {
      * @param filter фильтр
      * @return список офисов
      */
-    List<Office> getOfficeFilteredList(Office filter);
+    List<Office> getOfficeFilteredList(OfficeListFilterDto filter);
 
     /**
      * Обновление офиса

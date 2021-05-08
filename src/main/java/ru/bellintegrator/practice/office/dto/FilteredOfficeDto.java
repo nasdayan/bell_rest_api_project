@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * DTO для получения отфильтрованного списка офисов
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FilteredOfficeList {
+public class FilteredOfficeDto {
 
     /**
      * Ид офиса

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bellintegrator.practice.office.dto.FilteredOfficeList;
+import ru.bellintegrator.practice.office.dto.FilteredOfficeDto;
 import ru.bellintegrator.practice.office.dto.OfficeDto;
 import ru.bellintegrator.practice.office.dto.OfficeListFilterDto;
 import ru.bellintegrator.practice.office.dto.OfficeToSaveDto;
@@ -44,7 +44,7 @@ public class OfficeController {
      */
     @ApiOperation(value = "Получение списка офисов", httpMethod = "POST")
     @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<FilteredOfficeList> officeList(@RequestBody @Valid OfficeListFilterDto officeListFilterDto) {
+    public List<FilteredOfficeDto> officeList(@RequestBody @Valid OfficeListFilterDto officeListFilterDto) {
         return officeService.getFilteredOfficeList(officeListFilterDto);
     }
 

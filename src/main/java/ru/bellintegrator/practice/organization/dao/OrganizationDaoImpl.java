@@ -3,6 +3,7 @@ package ru.bellintegrator.practice.organization.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.bellintegrator.practice.exception.ItemNotFoundException;
+import ru.bellintegrator.practice.organization.dto.OrganizationFilterDto;
 import ru.bellintegrator.practice.organization.model.Organization;
 
 import javax.persistence.EntityManager;
@@ -24,7 +25,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public List<Organization> getFilteredOrganizationList(Organization filter) {
+    public List<Organization> getFilteredOrganizationList(OrganizationFilterDto filter) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);

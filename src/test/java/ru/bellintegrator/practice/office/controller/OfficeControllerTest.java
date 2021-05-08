@@ -55,9 +55,9 @@ public class OfficeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/office/list")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(filter)))
-                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Код ошибки: " + HttpStatus.NOT_FOUND + ". " + "Organizations with this identifier were not found"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data").isEmpty());
     }
 
     @Test

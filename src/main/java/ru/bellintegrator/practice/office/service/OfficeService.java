@@ -1,7 +1,7 @@
 package ru.bellintegrator.practice.office.service;
 
 import org.springframework.stereotype.Service;
-import ru.bellintegrator.practice.office.dto.FilteredOfficeList;
+import ru.bellintegrator.practice.office.dto.FilteredOfficeDto;
 import ru.bellintegrator.practice.office.dto.OfficeDto;
 import ru.bellintegrator.practice.office.dto.OfficeListFilterDto;
 import ru.bellintegrator.practice.office.dto.OfficeToSaveDto;
@@ -19,7 +19,7 @@ public interface OfficeService {
      * @param officeListFilterDto фильтр
      * @return список офисов
      */
-    List<FilteredOfficeList> getFilteredOfficeList(OfficeListFilterDto officeListFilterDto);
+    List<FilteredOfficeDto> getFilteredOfficeList(OfficeListFilterDto officeListFilterDto);
 
     /**
      * Получение офиса по ID
