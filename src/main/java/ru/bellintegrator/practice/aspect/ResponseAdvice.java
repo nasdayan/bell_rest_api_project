@@ -20,6 +20,9 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         ResponseToUser responseToUser = new ResponseToUser();
+        if (body instanceof ResponseError) {
+            return body;
+        }
         if (returnType.getParameterType().isAssignableFrom(void.class)) {
             body = new SuccessResponseResult();
         }
